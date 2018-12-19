@@ -7,12 +7,12 @@ const playlists = require('./routes/playlist')
 const home = require('./routes/home')
 // app.use(express.static)
 app.set('view engine', 'ejs')
+app.use(session({
+    secret: 'utunes'
+}))
 app.use(express.urlencoded({extended: false}))
 
 app.use('/', home)
-// app.use(session({
-//     secret:
-// }))
 app.use('/users', users)
 app.use('/playlists', playlists)
 

@@ -1,5 +1,5 @@
 'use strict';
-const encrypt = require('../helpers/encryption')
+const encrypt = require('../helpers/encryption.js')
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     fullName: DataTypes.STRING,
