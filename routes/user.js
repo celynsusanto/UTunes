@@ -16,14 +16,6 @@ router.get('/', (req, res) => {
     })
 })
 
-router.get('/login', (req, res) => {
-    res.render('./pages/loginPage.ejs')
-})
-
-router.post('/login', (req, res) => {
-    res.send(req.body)
-})
-
 router.get('/delete/:id', (req, res) => {
     Model.User.destroy(req.params.id)
     .then(() => {
