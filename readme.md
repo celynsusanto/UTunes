@@ -1,6 +1,12 @@
 Mahdi:
-    - Table Artist - seed
-    - Table Song - User & Conjunction table SongUser
+    - Table Artist - seed (v)
+        +models assoc (v)
+    - Table Song-User & Conjunction table SongUser
+        + model assoc (v)
+    - Table Users
+        + model assoc (v)
+        + login page
+        + register page
 
 Celyn
     - Table Song - seed
