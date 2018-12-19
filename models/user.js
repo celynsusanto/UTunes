@@ -1,13 +1,22 @@
 'use strict';
+const encrypt = require('../helpers/encryption')
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     fullName: DataTypes.STRING,
     email: DataTypes.STRING,
     username: DataTypes.STRING,
     password: DataTypes.STRING,
-    birthDate: DataTypes.DATE,
-    gender: DataTypes.STRING
-  }, {});
+    gender: DataTypes.STRING,
+    secret: DataTypes.STRING
+  }, {
+    hooks: {
+      beforeCreate: (value) => {
+        let generate = encrypt(value.password);
+        value.password = generate.hash;
+        value.secret = generate.secret;
+      }
+    }
+  });
   User.associate = function(models) {
     // associations can be defined here
     User.hasMany(models.Playlist)
