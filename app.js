@@ -14,6 +14,13 @@ app.get('/', (req, res) => {
     res.render('./pages/homepage')
 })
 
+app.get('/register', (req, res) => {
+    res.render('./pages/registerPage')
+})
+
+app.post('/register', (req, res) => {
+    res.send(req.body)
+})
 
 app.listen(port, () => {
     console.log(`Server is listening to port ${port}`)
