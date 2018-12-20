@@ -58,9 +58,10 @@ router.get('/delete/:id', (req, res) => {
 })
 
 router.get('/:id/list', (req, res) => {
-    Model.Playlist.findOne({
-        include: {model: Model.Song},
-    }, {where: {id: req.params.id}})
+    // res.send(req.params.id)
+    Model.Playlist.findByPk(req.params.id, {
+        include: {model: Model.Song}
+    })
     .then(list => {
         // res.send(list)  
         res.render('./pages/listPlaylist', {songs: list.Songs, id: req.params.id})

@@ -29,8 +29,8 @@ router.post('/:playlistId/:songId', (req, res) => {
         .findAll({include: {model: Model.Song}},{where: {id: playlistId}})
     })
     .then(playlist => {
-        res.send(playlist)
-        // res.redirect('/playlists/:playlistId/list', {song: song})
+        // res.send(playlist)
+        res.redirect('/playlists/:playlistId/list', {song: song})
     })
     .catch(err => {
         res.send(err)
