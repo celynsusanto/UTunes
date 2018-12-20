@@ -7,16 +7,18 @@
 <body>
     <h3>Your Playlists</h3>
     <table>
-    <tr>
-        <th>Name</th>
-        <th>Artists</th>
-        <th>Play</th>
-    </tr>  
+    <% if (user.Playlists != undefined) {user.Playlists.forEach((playlist) => {%>
+        <tr>
+            <td> <a href = ''> <%= playlist.name%> </a> </td>
+            <td> Open </td>
+        </tr>
+    <%})}%>
     </table>
-<audio controls>
-  <source src="horse.ogg" type="audio/ogg">
-  <source src="horse.mp3" type="audio/mpeg">
-Your browser does not support the audio element.
-</audio>
+    <h4>Add Playlist</h4>
+    <form method="POST">
+        <input type="text" name="Playlist Name"><br><br>
+        <button type = "submit"> Add </button>
+    </form>
+
 </body>
 </html>

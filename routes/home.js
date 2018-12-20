@@ -44,10 +44,9 @@ router.post('/login', (req, res) => {
                 membership: passwordChecking.membership,
                 balance: passwordChecking.balance
             }
-                res.redirect('/')
+            res.redirect('/users')
         }
     })
-
     .catch((err) => {
         res.redirect(`/login?error=${err}`)
     })

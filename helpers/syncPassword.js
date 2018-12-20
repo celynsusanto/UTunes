@@ -5,10 +5,6 @@ function hash(password, secret) {
     const hash = crypto.createHmac('sha256', secret)
                    .update(password)
                    .digest('hex');
-    // let objHash = {
-    //     secret : secret,
-    //     hash : hash
-    // }
     return hash;
 }
 
