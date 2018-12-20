@@ -3,7 +3,12 @@ const router = express.Router()
 const Model = require('../models')
 
 router.get('/', (req, res) => {
-    res.render('./pages/homepage.ejs')
+    if (req.session.user === undefined) {
+        res.render('./pages/homepage.ejs')
+    } else {
+        res.render('./pages/homepageUser.ejs')
+    }
+    // console.log(req.session.user)
 })
 
 router.get('/login', (req, res) => {
@@ -16,15 +21,16 @@ router.post('/login', (req, res) => {
     Model.User
     .findOne({where: {username: userLogin.username}})
     .then((user) => {
-        if (!user) {
-            res.redirect('/login')
-        } else {
-            req.session.user = {
-                id: user.id,
-                username: user.username
-            }
-            res.redirect('/')
-        }
+            
+        // if (!user) {
+        //     res.redirect('/login')
+        // } else {
+        //     req.session.user = {
+        //         id: user.id,
+        //         username: user.username
+        //     }
+        //     res.redirect('/')
+        // }
     })
     .catch((err) => {
         res.send(err)
@@ -51,5 +57,7 @@ router.post('/register', (req, res) => {
         res.send(err)
     })
 })
+
+router
 
 module.exports = router
