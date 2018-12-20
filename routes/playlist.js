@@ -1,7 +1,10 @@
 const express = require('express')
 const router = express.Router()
 const Model = require('../models')
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 
+router.use(express.static('uploads'))
 // router.use((req, res, next) => {
 //     if (req.session.user) {
 //         next()
