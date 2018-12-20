@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <%- include('../partials/tableStyle.ejs') %>
+    </head>
+    <body>  
+        <%- include('../partials/navbarUser.ejs') %>
+        <h4><a href= "/songs/<%= id %>">Add Songs</a></h4>
+        <table> 
+            <tr>
+                <th> title </th>
+            </tr>
+            <% songs.forEach(e => { %>
+                <tr>    
+                    <td> <%= e.title %> </td>
+                </tr>
+            <% }) %>
+        </table>
+    
+    </body>   
+</html>

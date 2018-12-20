@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <%- include('../partials/tableStyle.ejs') %>
+</head>
+<header>
+    <%- include('../partials/navbarUser.ejs') %>
+</header>
+<body>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Song Tag</th>
+            <th></th>
+        </tr>
+        <% song.forEach(e => { %>
+            <tr>
+                <td> <%= e.title %> </td>
+                <td> <%= e.songTag %> </td>
+                <td> 
+                    <form action = "/songs/<%= id %>/<%= e.id %>" method = "POST">
+                        <button type= "submit">Add Song</button>
+                    </form>
+                </td>
+            </tr>
+        <% }) %>
+
+    </table>
+    <audio controls>
+        <source src="135472ebc77e96c0dd3a79073d860c12.mp3" type="audio/ogg">
+        <source src="135472ebc77e96c0dd3a79073d860c12.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+</audio>
+</body>
+</html>

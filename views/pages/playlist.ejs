@@ -9,8 +9,8 @@
     <table>
     <% if (user.Playlists != undefined) {user.Playlists.forEach((playlist) => {%>
         <tr>
-            <td> <a href = ''> <%= playlist.name%> </a> </td>
-            <td > Delete </td>
+            <td> <a href = '/playlists/<%= playlist.id %>/list'> <%= playlist.name%> </a> </td>
+            <td > <a href = "/playlists/delete/<%= playlist.id %>">Delete</a> </td>
         </tr>
     <%})}%>
     </table>

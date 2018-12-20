@@ -44,5 +44,32 @@ router.post('/', (req, res) => {
     })
 })
 
+router.get('/delete/:id', (req, res) => {
+    Model.Playlist
+    .destroy({where: {
+        id: req.params.id
+    }})
+    .then(() => {
+        res.redirect('/playlists')
+    })
+    .catch(err => {
+        res.send(err)
+    })
+})
+
+router.get('/:id/list', (req, res) => {
+    Model.Playlist.findOne({
+        include: {model: Model.Song},
+    }, {where: {id: req.params.id}})
+    .then(list => {
+        // res.send(list)  
+        res.render('./pages/listPlaylist', {songs: list.Songs, id: req.params.id})
+    })
+    .catch(err => {
+        res.send(err)
+    })
+})
+
+
 
 module.exports = router
