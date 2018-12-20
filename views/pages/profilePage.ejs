@@ -4,6 +4,12 @@
     <title>Profile Page</title>
 </head>
 <body>
-    <a href="">Delete Account</a>
+    <%- include('../partials/navbarUser') %>
+    <h3> <a href="/playlists/">Create Playlist</a> </h3>
+    <h3> <a href="/users/<%=id%> /profile/edit">Edit Profile</a> </h3>
+    <h3> <a href="">Upgrade Membership</a> </h3>
+    <h3> <a href="">Top Up Balance</a> </h3>
+    <br>
+    <h3 style="color:red"> <a href="">Delete Account</a> </h3>
 </body>
 </html>
