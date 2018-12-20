@@ -16,6 +16,12 @@ router.get('/', (req, res) => {
     })
 })
 
+
+// router.get('/:id', (req, res, next) => {
+//    // cek session 
+// }, (req, res) => {
+//     res.send("hello")
+// })
 router.get('/delete/:id', (req, res) => {
     Model.User.destroy(req.params.id)
     .then(() => {
@@ -25,5 +31,16 @@ router.get('/delete/:id', (req, res) => {
         res.send(err)
     })
 })
+
+router.get('/:id/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if(err) {
+            res.send(err)
+        } else {
+            res.redirect('/')
+        }
+    })
+})
+
 
 module.exports = router

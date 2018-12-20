@@ -4,7 +4,11 @@ const Model = require('../models')
 const syncPassword = require('../helpers/syncPassword')
 
 router.get('/', (req, res) => {
-    res.render('./pages/homepage.ejs')
+    if (req.session.user === undefined) {
+        res.render('./pages/homepage.ejs')
+    } else {
+        res.render('./pages/homepageUser.ejs')
+    }
 })
 
 router.get('/login', (req, res) => {
@@ -21,7 +25,7 @@ router.post('/login', (req, res) => {
     .findOne({where: {username: userLogin.username}})
     .then((usernameChecking) => {
         if (!usernameChecking) {
-            throw 'Password Tidak Ditemukan'
+            throw 'Username Tidak Ditemukan'
         } else {
             userData = usernameChecking
             let syncPassWithHash = syncPassword(req.body.password, userData.secret)
@@ -34,23 +38,16 @@ router.post('/login', (req, res) => {
         if (passwordChecking === null) {
             throw 'Password Salah'
         } else {
-            return Model.User.findOne({
-                where: {password: req.body.password}
-            })
+            req.session.user = {
+                id: passwordChecking.id,
+                username: passwordChecking.username,
+                membership: passwordChecking.membership,
+                balance: passwordChecking.balance
+            }
+                res.redirect('/')
         }
     })
-    // .then(passwordChecking => {
-    //     console.log(passwordChecking)
-    // })
 
-                // req.session.user = {
-                //     id: user.id,
-                //     username: user.username,
-                //     membership: user.membership,
-                //     balance: user.balance
-                // }
-                //     // res.redirect('/')
-                //     res.send(req.session)
     .catch((err) => {
         res.redirect(`/login?error=${err}`)
     })
@@ -70,7 +67,7 @@ router.post('/register', (req, res) => {
         gender: userData.gender
     })
     .then(() => {
-        res.redirect('/')
+        res.redirect('/login')
     })
     .catch((err) => {
         res.send(err)
