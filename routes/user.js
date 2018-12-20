@@ -14,7 +14,6 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:id/profile', (req, res) => {
-    // console.log(`/${req.params.id}/profile`)
     res.render('./pages/profilePage', {id: req.params.id})
 })
 
@@ -46,6 +45,37 @@ router.post('/:id/profile/edit', (req, res) => {
         res.send(err)
     })
 })
+
+router.get('/:id/profile/upgrade', (req, res) => {
+    let err = req.query.error
+    Model.User.findByPk(req.params.id)
+    .then(() => {
+        res.render('./pages/upgradeMembership', {id: req.params.id.trim(), err: err})
+    })
+    .catch(err => {
+        res.send(err)
+    })
+})
+
+router.post('/:id/profile/upgrade', (req, res) => { 
+    Model.User.findByPk(req.params.id)
+    .then((user) => {
+        return Model.User.update({
+            membership: 'premium'
+        }, {where: {id: req.params.id}})
+    })
+    .then(() => {
+        res.redirect(`/users/${req.params.id}/profile`)
+    })
+    .catch(err => {
+        res.redirect(`/users/${req.params.id}/profile/upgrade?error=${err}`)
+    })
+})
+
+// router.get('/:id/profile/topup', (req, res) => {
+//     res.render('./pages/topup')
+// })
+
 
 //MIDDLEWARE
 // router.get('/:id', (req, res, next) => {
