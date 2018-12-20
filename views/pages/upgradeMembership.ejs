@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Membership Upgrade</title>
+</head>
+<body>
+    <h2 style="color:brown"> Rasakan kenikmatan menjadi premium member!</h2>
+    <form action="/users/<%=id%>/profile/upgrade" method="POST">
+        <button type="submit" value="Submit">Premium Trial</button>
+    </form>
+    <h2 style="color:green"> <%= err %> </h2>
+</body>
+</html>
