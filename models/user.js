@@ -7,7 +7,9 @@ module.exports = (sequelize, DataTypes) => {
     username: DataTypes.STRING,
     password: DataTypes.STRING,
     gender: DataTypes.STRING,
-    secret: DataTypes.STRING
+    secret: DataTypes.STRING,
+    membership: DataTypes.STRING,
+    balance: DataTypes.INTEGER
   }, {
     hooks: {
       beforeCreate: (value) => {

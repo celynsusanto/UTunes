@@ -16,15 +16,6 @@ app.use('/', home)
 app.use('/users', users)
 app.use('/playlists', playlists)
 
-
-app.get('/register', (req, res) => {
-    res.render('./pages/registerPage')
-})
-
-app.post('/register', (req, res) => {
-    res.send(req.body)
-})
-
 app.listen(port, () => {
     console.log(`Server is listening to port ${port}`)
 })

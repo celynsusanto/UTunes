@@ -5,8 +5,8 @@ Mahdi:
         + model assoc (v)
     - Table Users
         + model assoc (v)
-        + login page
-        + register page
+        + login page (v)
+        + register page (v)
 
 Celyn
     - Table Song - seed
@@ -14,7 +14,7 @@ Celyn
 
 All Models Associations (checked)
 Seed all Artists Data (checked)
-Seed all Songs Data  ==> Celyn 
+Seed all Songs Data  ==> Celyn (checked)
 Playlist routes ==> Celyn (checked)
 User routes ==> Mahdi (checked)
 Partials Navbar (checked)
