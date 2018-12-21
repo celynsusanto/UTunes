@@ -10,13 +10,22 @@
             <tr>
                 <th> title </th>
             </tr>
-            
+            <% if(songs.length !== 0) { %>
             <% songs.forEach(e => { %>
                 <tr>    
-                    <td> <%= e.title %> </td>
+                    <td style = "height: 30px"> <%= e.title %> </td>
+                </tr>
+                <tr>
+                <td>
+                    <audio controls >
+                    <source src="<%- e.url %>" type="audio/ogg">
+                    <source src="<%- e.url %>" type="audio/mpeg">
+                    </audio>
+                    </td>
                 </tr>
             <% }) %>
+            <% } %>
         </table>
-    
+      
     </body>   
 </html>

@@ -9,8 +9,8 @@
     <table>
     <% if (user.Playlists != undefined) {user.Playlists.forEach((playlist) => {%>
         <tr>
-            <td> <a href = '/playlists/<%= playlist.id %>/list'> <%= playlist.name%> </a> </td>
-            <td > <a href = "/playlists/delete/<%= playlist.id %>">Delete</a> </td>
+            <td> <a href = '/playlists/list/<%= playlist.id %>'> <%= playlist.name%> </a> </td>
+            <td> <a href = "/playlists/delete/<%= playlist.id %>">Delete</a> </td>
         </tr>
     <%})}%>
     </table>
@@ -19,10 +19,5 @@
         <input type="text" name="Playlist Name"><br><br>
         <button type = "submit"> Add </button>
     </form>
-    <audio controls>
-        <source src="135472ebc77e96c0dd3a79073d860c12.mp3" type="audio/ogg">
-        <source src="135472ebc77e96c0dd3a79073d860c12.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-</audio>
 </body>
 </html>

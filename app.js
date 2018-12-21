@@ -9,14 +9,14 @@ const upload = require('./routes/songUpload')
 const Model = require('./models')
 const song = require('./routes/song')
 
-
-app.use(express.static('uploads'))
+app.use('/playlists/list', express.static('uploads'))
+app.use(express.urlencoded({extended: false}))
 app.set('view engine', 'ejs')
 
 app.use(session({
     secret: 'utunes'
 }))
-app.use(express.urlencoded({extended: false}))
+
 app.get('/delete/:id', (req, res) => {
     Model.Artist.destroy({
         where: {id: req.params.id}

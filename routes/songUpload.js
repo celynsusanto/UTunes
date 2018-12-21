@@ -2,9 +2,9 @@ const express = require('express')
 const router = express.Router()
 const Model = require('../models')
 const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
+const storage = multer.memoryStorage()
+const upload = multer({storage:storage })
 
-router.use(express.static('uploads'))
 
 router.get('/', (req, res) => {
     res.render('./pages/addSongs')
@@ -12,12 +12,11 @@ router.get('/', (req, res) => {
 
 router.post('/', upload.single('music'), function (req, res, next) {
     // req.file is the `avatar` file
-    console.log(req.file)   
+
     let parseData = req.file.originalname.split(' - ') 
     let artist = parseData[0]
     let semiTitle = parseData[1].split('.')
     let title = semiTitle[0]
-    // console.log(artist, title)
     let randomizeTag = ['free', 'premium']
     let random = randomizeTag[Math.floor(Math.random() * randomizeTag.length)]
     Model.Artist.create({
@@ -26,8 +25,6 @@ router.post('/', upload.single('music'), function (req, res, next) {
         updatedAt: new Date
     })
     .then((data) => {
-        // console.log(data.id);
-        
         return Model.Song.create({
             title: title,
             songTag: random,

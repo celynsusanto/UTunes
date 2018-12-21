@@ -2,22 +2,14 @@ const express = require('express')
 const router = express.Router()
 const Model = require('../models')
 const multer  = require('multer')
-const upload = multer({ dest: 'uploads/' })
+const storage = multer.memoryStorage()
+const upload = multer({dest: 'public/uploads'})
 
-router.use(express.static('uploads'))
-// router.use((req, res, next) => {
-//     if (req.session.user) {
-//         next()
-//     } else {
-//         res.send('Tidak dapat akses')
-//     }
-// })
 router.get('/', (req, res, next) => {
     if (req.session.user) {
         next()
     } else {
         res.redirect("/login")
-        // res.redirect('/')
     }
 }, (req, res) =>{
     let theId = req.session.user.id
@@ -57,14 +49,12 @@ router.get('/delete/:id', (req, res) => {
     })
 })
 
-router.get('/:id/list', (req, res) => {
-    // res.send(req.params.id)
+router.get('/list/:id', (req, res) => {
     Model.Playlist.findByPk(req.params.id, {
         include: {model: Model.Song}
     })
     .then(list => {
-        // res.send(list)  
-        res.render('./pages/listPlaylist', {songs: list.Songs, id: req.params.id})
+        res.render('./pages/listPlaylist', {url: list.Songs[0].url, songs: list.Songs, id: req.params.id})
     })
     .catch(err => {
         res.send(err)

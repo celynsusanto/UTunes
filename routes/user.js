@@ -14,7 +14,8 @@ router.get('/', (req, res) => {
 })
 
 router.get('/:id/profile', (req, res) => {
-    res.render('./pages/profilePage', {id: req.params.id})
+    // console.log(req.session.user.id)
+    res.render('./pages/profilePage', {id: req.session.user.id})
 })
 
 router.get('/:id/profile/edit', (req, res) => {
